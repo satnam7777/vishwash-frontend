@@ -36,7 +36,7 @@ export async function signin(email: string, password: string) {
 
 // ✅ Get all stocks
 export const getStocks = async () => {
-  const res = await fetch(`${BASE_URL}/stocks`, {
+  const res = await fetch(`${API_BASE_URL}/stocks`, {
     credentials: 'include',
   })
 
@@ -46,7 +46,7 @@ export const getStocks = async () => {
 
 // ✅ Get single stock
 export const getStock = async (symbol: string) => {
-  const res = await fetch(`${BASE_URL}/stocks/${symbol}`, {
+  const res = await fetch(`${API_BASE_URL}/stocks/${symbol}`, {
     credentials: 'include',
   })
 
@@ -56,7 +56,7 @@ export const getStock = async (symbol: string) => {
 
 // ✅ Get stock history (for charts)
 export const getStockHistory = async (symbol: string) => {
-  const res = await fetch(`${BASE_URL}/stocks/${symbol}/history`, {
+  const res = await fetch(`${API_BASE_URL}/stocks/${symbol}/history`, {
     credentials: 'include',
   })
 

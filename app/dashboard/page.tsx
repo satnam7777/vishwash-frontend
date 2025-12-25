@@ -1,12 +1,22 @@
 'use client';
 
 import KPIStatCard from '../components/KpiStatCards';
-import { Eye, DollarSign, Package, Users } from 'lucide-react';
+import { Eye, DollarSign, Package, Users, BarChart3 } from 'lucide-react';
 import PaymentsOverview from '../components/PaymentsOverview';
 import ProfitThisWeek from '../components/ProfitthisWeek';
 import UsedDevices from '../components/Useddevices';
 import USRegionMap from '../components/RegionLabels';
 import TopChannelsAndChats from '../components/TopChannels';
+
+const iconsMap = {
+  BarChart3,
+  Users,
+  DollarSign,
+} as const; // 'as const' locks the keys
+
+type IconKeys = keyof typeof iconsMap; // "BarChart3" | "Users" | "DollarSign"
+
+
 
 export default function DashboardPage() {
   return (

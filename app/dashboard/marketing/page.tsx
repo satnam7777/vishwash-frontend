@@ -1,7 +1,5 @@
 'use client';
-import React from 'react';
-
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import {
   BarChart,
@@ -24,19 +22,33 @@ import {
   ExternalLink,
 } from 'lucide-react';
 
+// ------------------ Types ------------------
+type IconKey = 'BarChart3' | 'Users' | 'DollarSign';
+
+type Stat = {
+  label: string;
+  value: string;
+  trend: string;
+  trendColor: string;
+  icon: IconKey;
+  description: string;
+};
+
+// ------------------ Component ------------------
 export default function DashboardPage() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [stats, setStats] = useState([]);
-  const [campaignLine, setCampaignLine] = useState([]);
-  const [campaignBar, setCampaignBar] = useState([]);
-  const [topChannels, setTopChannels] = useState([]);
-  const [featuredCampaigns, setFeaturedCampaigns] = useState([]);
-  const [externalLinks, setExternalLinks] = useState([]);
+  const [stats, setStats] = useState<Stat[]>([]);
+  const [campaignLine, setCampaignLine] = useState<any[]>([]);
+  const [campaignBar, setCampaignBar] = useState<any[]>([]);
+  const [topChannels, setTopChannels] = useState<any[]>([]);
+  const [featuredCampaigns, setFeaturedCampaigns] = useState<any[]>([]);
+  const [externalLinks, setExternalLinks] = useState<any[]>([]);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const iconsMap = { BarChart3, Users, DollarSign };
+  // Type-safe icons map
+  const iconsMap: Record<IconKey, React.ElementType> = { BarChart3, Users, DollarSign };
 
-  // Fetch data from single API
+  // ------------------ Fetch Data ------------------
   useEffect(() => {
     fetch('http://localhost:5000/api/dashboard')
       .then(res => res.json())
@@ -51,23 +63,22 @@ export default function DashboardPage() {
       .catch(err => console.error(err));
   }, []);
 
-  // Close menu when clicking outside
-useEffect(() => {
-  const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      setMenuOpen(false);
-    }
-  };
-
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, []);
-
+  // ------------------ Click Outside Menu ------------------
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   if (!stats.length) return <p className="text-white p-6">Loading dashboard...</p>;
 
+  // ------------------ Render ------------------
   return (
     <div className="p-3 dark:bg-gray-900 min-h-screen space-y-6">
       {/* Highlights Section */}
@@ -103,9 +114,7 @@ useEffect(() => {
           {stats.map((stat, idx) => (
             <div key={idx} className="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-sm">
               <div className="flex items-center w-8 gap-3 mb-4">
-                {iconsMap[stat.icon] ? 
-                  React.createElement(iconsMap[stat.icon], { className: 'w-6 h-6 text-indigo-600' }) 
-                  : <BarChart3 className="w-6 h-6 text-indigo-600" />}
+                {iconsMap[stat.icon] && React.createElement(iconsMap[stat.icon], { className: 'w-6 h-6 text-indigo-600' })}
               </div>
               <h4 className="text-gray-600 mt-5 mb-2 dark:text-gray-300 text-xl font-medium">{stat.label}</h4>
               <p className="text-2xl font-bold text-gray-900 mb-3 dark:text-white">{stat.value}</p>
@@ -131,7 +140,7 @@ useEffect(() => {
               <div key={idx} className="flex justify-between items-center p-5">
                 <div className="flex items-center gap-3">
                   <img src={link.icon} alt={link.name} className="w-6 h-6 rounded" />
-                  <span className="font-medium text-gray-800 dark:text-gray-200">{link.name}</span>x
+                  <span className="font-medium text-gray-800 dark:text-gray-200">{link.name}</span>
                 </div>
                 <ExternalLink className="w-4 h-4 text-gray-400" />
               </div>

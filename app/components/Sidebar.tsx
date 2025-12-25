@@ -52,7 +52,7 @@ export default function Sidebar() {
         { label: 'Analytics', href: '#', pro: true },
         { label: 'Marketing', href: '/dashboard/marketing', pro: true },
         { label: 'CRM', href: '/dashboard/crm', pro: true },
-        { label: 'Stocks', href: '#', pro: true },
+        { label: 'Stocks', href: '/dashboard/stocks', pro: true },
       ],
     },
     { label: 'Calendar', href: '#', icon: <Calendar size={18} /> },
