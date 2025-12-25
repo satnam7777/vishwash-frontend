@@ -32,7 +32,7 @@ export default function DashboardPage() {
   const [topChannels, setTopChannels] = useState([]);
   const [featuredCampaigns, setFeaturedCampaigns] = useState([]);
   const [externalLinks, setExternalLinks] = useState([]);
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const iconsMap = { BarChart3, Users, DollarSign };
 
