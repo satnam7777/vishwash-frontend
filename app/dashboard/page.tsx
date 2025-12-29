@@ -1,4 +1,5 @@
 'use client';
+export const dynamic = "force-dynamic";
 
 import KPIStatCard from '../components/KpiStatCards';
 import { Eye, DollarSign, Package, Users, BarChart3 } from 'lucide-react';
