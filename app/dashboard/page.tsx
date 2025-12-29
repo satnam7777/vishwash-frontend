@@ -8,7 +8,7 @@ import ProfitThisWeek from '../components/ProfitthisWeek';
 import UsedDevices from '../components/Useddevices';
 import USRegionMap from '../components/RegionLabels';
 import TopChannelsAndChats from '../components/TopChannels';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react';
 
 const iconsMap = {
