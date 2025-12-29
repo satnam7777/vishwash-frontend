@@ -2,13 +2,13 @@
 export function login(token: string) {
 	localStorage.setItem("token", token);
 	// Set cookie for middleware (1 week)
-	document.cookie = `auth-token=${token}; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+	document.cookie = `auth-token=${token}; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=none`;
 }
 
 export function logout() {
 	localStorage.removeItem("token");
 	// Clear cookie
-	document.cookie = `auth-token=; Path=/; Max-Age=0; SameSite=Lax`;
+	document.cookie = `auth-token=; Path=/; Max-Age=0; SameSite=none`;
 }
 
 export function getToken() {
