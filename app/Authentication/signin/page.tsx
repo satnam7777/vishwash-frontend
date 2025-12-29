@@ -204,10 +204,13 @@ export default function SigninPage() {
 
       const data = await signin(email, password);
 
-      if (data && data.token) {
-        localStorage.setItem("token", data.token);
-        router.push("/dashboard");
-      } else {
+     if (data && data.token) {
+  localStorage.setItem('token', data.token);
+
+  // Use hard redirect to avoid race
+  window.location.href = '/dashboard';
+}
+ else {
         setError("Invalid login response");
       }
     } catch (err: any) {
