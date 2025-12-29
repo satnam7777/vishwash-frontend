@@ -7,6 +7,8 @@ import ProfitThisWeek from '../components/ProfitthisWeek';
 import UsedDevices from '../components/Useddevices';
 import USRegionMap from '../components/RegionLabels';
 import TopChannelsAndChats from '../components/TopChannels';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const iconsMap = {
   BarChart3,
@@ -19,6 +21,20 @@ type IconKeys = keyof typeof iconsMap; // "BarChart3" | "Users" | "DollarSign"
 
 
 export default function DashboardPage() {
+
+
+
+    const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.replace("/Authentication/signin");
+    }
+  }, []);
+
+
+
   return (
     <div className="bg-gray-100 dark:bg-gray-900 min-h-screen w-full overflow-x-hidden">
       <div className="pt-6 px-4 sm:px-6 sm:w-full max-w-[270px] sm:max-w-full  mx-auto">
