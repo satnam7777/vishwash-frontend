@@ -274,7 +274,7 @@ export default function SigninPage() {
           type="button"
           onClick={() => {
             localStorage.removeItem("token");
-            fetch("http://localhost:5000/api/auth/logout", {
+            fetch("https://vishwash-backend.onrender.com/api/auth/logout", {
               method: "POST",
               credentials: "include",
             }).then(() => {
